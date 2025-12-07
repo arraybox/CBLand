@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_02c2862b055e3c40867a141de38fd0f9 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_02c2862b055e3c40867a141de38fd0f9" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_02c2862b055e3c40867a141de38fd0f9 = L.map(
+                "map_02c2862b055e3c40867a141de38fd0f9",
+                {
+                    center: [36.8, 127.7],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 9,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_1056dc13ff79aa606938a66bdec58a0b = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_1056dc13ff79aa606938a66bdec58a0b.addTo(map_02c2862b055e3c40867a141de38fd0f9);
+        
+    
+            var circle_marker_63f869fd24cac2558bb38c30b860a6b9 = L.circleMarker(
+                [36.5746, 127.5252],
+                {"bubblingMouseEvents": true, "color": "darkblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 26.13377570952545, "stroke": true, "weight": 3}
+            ).addTo(map_02c2862b055e3c40867a141de38fd0f9);
+        
+    
+        var popup_541e818fce15b5abb24baa06199626ba = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_a7b31eac51a3190b2b9c1c699e7d20d8 = $(`<div id="html_a7b31eac51a3190b2b9c1c699e7d20d8" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Malgun Gothic; width:280px">             <h4>청주 상당구</h4>             <hr>             <b>인구 (2025):</b> 89,305세대<br>             <b>인구 증감 (8년):</b> <span style="color:darkblue">28.27%</span><br>             <br>             <b>핵심 지표:</b>             <ul>                 <li>도로율: 3.13%</li>                 <li>공장용지: 0.24%</li>                 <li>대지(주거): 3.67%</li>             </ul>         </div>         </div>`)[0];
+                popup_541e818fce15b5abb24baa06199626ba.setContent(html_a7b31eac51a3190b2b9c1c699e7d20d8);
+            
+        
+
+        circle_marker_63f869fd24cac2558bb38c30b860a6b9.bindPopup(popup_541e818fce15b5abb24baa06199626ba)
+        ;
+
+        
+    
+    
+            circle_marker_63f869fd24cac2558bb38c30b860a6b9.bindTooltip(
+                `<div>
+                     청주 상당구 (28.3%)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1327fcb953bd7c8e7d128b0544793b6a = L.circleMarker(
+                [36.5786, 127.4597],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12.565073911667646, "stroke": true, "weight": 3}
+            ).addTo(map_02c2862b055e3c40867a141de38fd0f9);
+        
+    
+        var popup_1c3ebe42dc6baa43f00b002fba277ac7 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ff23751d69f3fdf296b06e7d76a4289a = $(`<div id="html_ff23751d69f3fdf296b06e7d76a4289a" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Malgun Gothic; width:280px">             <h4>청주 서원구</h4>             <hr>             <b>인구 (2025):</b> 89,484세대<br>             <b>인구 증감 (8년):</b> <span style="color:blue">1.13%</span><br>             <br>             <b>핵심 지표:</b>             <ul>                 <li>도로율: 6.79%</li>                 <li>공장용지: 2.57%</li>                 <li>대지(주거): 9.57%</li>             </ul>         </div>         </div>`)[0];
+                popup_1c3ebe42dc6baa43f00b002fba277ac7.setContent(html_ff23751d69f3fdf296b06e7d76a4289a);
+            
+        
+
+        circle_marker_1327fcb953bd7c8e7d128b0544793b6a.bindPopup(popup_1c3ebe42dc6baa43f00b002fba277ac7)
+        ;
+
+        
+    
+    
+            circle_marker_1327fcb953bd7c8e7d128b0544793b6a.bindTooltip(
+                `<div>
+                     청주 서원구 (1.1%)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_36bdd51a6936e4ed1f1725ea0d3ec016 = L.circleMarker(
+                [36.6346, 127.4278],
+                {"bubblingMouseEvents": true, "color": "darkblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 27.418524855318395, "stroke": true, "weight": 3}
+            ).addTo(map_02c2862b055e3c40867a141de38fd0f9);
+        
+    
+        var popup_988b7ce3da84f8de233bfb8a081591ca = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_1420125bc51181c72ca41391547f2e6a = $(`<div id="html_1420125bc51181c72ca41391547f2e6a" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Malgun Gothic; width:280px">             <h4>청주 흥덕구</h4>             <hr>             <b>인구 (2025):</b> 139,942세대<br>             <b>인구 증감 (8년):</b> <span style="color:darkblue">30.84%</span><br>             <br>             <b>핵심 지표:</b>             <ul>                 <li>도로율: 7.41%</li>                 <li>공장용지: 6.51%</li>                 <li>대지(주거): 9.16%</li>             </ul>         </div>         </div>`)[0];
+                popup_988b7ce3da84f8de233bfb8a081591ca.setContent(html_1420125bc51181c72ca41391547f2e6a);
+            
+        
+
+        circle_marker_36bdd51a6936e4ed1f1725ea0d3ec016.bindPopup(popup_988b7ce3da84f8de233bfb8a081591ca)
+        ;
+
+        
+    
+    
+            circle_marker_36bdd51a6936e4ed1f1725ea0d3ec016.bindTooltip(
+                `<div>
+                     청주 흥덕구 (30.8%)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_946ce9adcafaa6fd468ec8427a28b8b0 = L.circleMarker(
+                [36.7118, 127.5255],
+                {"bubblingMouseEvents": true, "color": "darkblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18.10010749632412, "stroke": true, "weight": 3}
+            ).addTo(map_02c2862b055e3c40867a141de38fd0f9);
+        
+    
+        var popup_2a0762117bb488525f87096b2e4bcded = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_d6b36da4040eaa0d8c502947905afea7 = $(`<div id="html_d6b36da4040eaa0d8c502947905afea7" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Malgun Gothic; width:280px">             <h4>청주 청원구</h4>             <hr>             <b>인구 (2025):</b> 90,807세대<br>             <b>인구 증감 (8년):</b> <span style="color:darkblue">12.20%</span><br>             <br>             <b>핵심 지표:</b>             <ul>                 <li>도로율: 7.20%</li>                 <li>공장용지: 4.38%</li>                 <li>대지(주거): 7.04%</li>             </ul>         </div>         </div>`)[0];
+                popup_2a0762117bb488525f87096b2e4bcded.setContent(html_d6b36da4040eaa0d8c502947905afea7);
+            
+        
+
+        circle_marker_946ce9adcafaa6fd468ec8427a28b8b0.bindPopup(popup_2a0762117bb488525f87096b2e4bcded)
+        ;
+
+        
+    
+    
+            circle_marker_946ce9adcafaa6fd468ec8427a28b8b0.bindTooltip(
+                `<div>
+                     청주 청원구 (12.2%)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_faf5b3213d72271cd2059e511f0dae98 = L.circleMarker(
+                [36.9915, 127.9259],
+                {"bubblingMouseEvents": true, "color": "darkblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 19.93220752166301, "stroke": true, "weight": 3}
+            ).addTo(map_02c2862b055e3c40867a141de38fd0f9);
+        
+    
+        var popup_f21cd110c5f3f6305bda2702cd849949 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_649dfe9e6e062cfe7eac3e8322947e23 = $(`<div id="html_649dfe9e6e062cfe7eac3e8322947e23" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Malgun Gothic; width:280px">             <h4>충주시</h4>             <hr>             <b>인구 (2025):</b> 104,563세대<br>             <b>인구 증감 (8년):</b> <span style="color:darkblue">15.86%</span><br>             <br>             <b>핵심 지표:</b>             <ul>                 <li>도로율: 4.05%</li>                 <li>공장용지: 1.20%</li>                 <li>대지(주거): 2.85%</li>             </ul>         </div>         </div>`)[0];
+                popup_f21cd110c5f3f6305bda2702cd849949.setContent(html_649dfe9e6e062cfe7eac3e8322947e23);
+            
+        
+
+        circle_marker_faf5b3213d72271cd2059e511f0dae98.bindPopup(popup_f21cd110c5f3f6305bda2702cd849949)
+        ;
+
+        
+    
+    
+            circle_marker_faf5b3213d72271cd2059e511f0dae98.bindTooltip(
+                `<div>
+                     충주시 (15.9%)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c50941ea5399e4fa97ee6fd8635af1f9 = L.circleMarker(
+                [37.1326, 128.1909],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 15.59166411080082, "stroke": true, "weight": 3}
+            ).addTo(map_02c2862b055e3c40867a141de38fd0f9);
+        
+    
+        var popup_bd72fc039658529098681e8b144bc034 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_0a34896f1070f410233e3bf7d737afe8 = $(`<div id="html_0a34896f1070f410233e3bf7d737afe8" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Malgun Gothic; width:280px">             <h4>제천시</h4>             <hr>             <b>인구 (2025):</b> 66,399세대<br>             <b>인구 증감 (8년):</b> <span style="color:blue">7.18%</span><br>             <br>             <b>핵심 지표:</b>             <ul>                 <li>도로율: 2.77%</li>                 <li>공장용지: 0.49%</li>                 <li>대지(주거): 1.97%</li>             </ul>         </div>         </div>`)[0];
+                popup_bd72fc039658529098681e8b144bc034.setContent(html_0a34896f1070f410233e3bf7d737afe8);
+            
+        
+
+        circle_marker_c50941ea5399e4fa97ee6fd8635af1f9.bindPopup(popup_bd72fc039658529098681e8b144bc034)
+        ;
+
+        
+    
+    
+            circle_marker_c50941ea5399e4fa97ee6fd8635af1f9.bindTooltip(
+                `<div>
+                     제천시 (7.2%)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1f17fee6df27426894074a8589451cb0 = L.circleMarker(
+                [36.4893, 127.729],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12.88479486091752, "stroke": true, "weight": 3}
+            ).addTo(map_02c2862b055e3c40867a141de38fd0f9);
+        
+    
+        var popup_ff6b630de042fa664a0ed8a443fae48e = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_41cbbb96f0324fe0caa6a421508f5d48 = $(`<div id="html_41cbbb96f0324fe0caa6a421508f5d48" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Malgun Gothic; width:280px">             <h4>보은군</h4>             <hr>             <b>인구 (2025):</b> 16,793세대<br>             <b>인구 증감 (8년):</b> <span style="color:blue">1.77%</span><br>             <br>             <b>핵심 지표:</b>             <ul>                 <li>도로율: 2.74%</li>                 <li>공장용지: 0.38%</li>                 <li>대지(주거): 1.66%</li>             </ul>         </div>         </div>`)[0];
+                popup_ff6b630de042fa664a0ed8a443fae48e.setContent(html_41cbbb96f0324fe0caa6a421508f5d48);
+            
+        
+
+        circle_marker_1f17fee6df27426894074a8589451cb0.bindPopup(popup_ff6b630de042fa664a0ed8a443fae48e)
+        ;
+
+        
+    
+    
+            circle_marker_1f17fee6df27426894074a8589451cb0.bindTooltip(
+                `<div>
+                     보은군 (1.8%)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_cf01bea757a32598e0f125923c704d37 = L.circleMarker(
+                [36.3063, 127.5714],
+                {"bubblingMouseEvents": true, "color": "darkblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.390725633319022, "stroke": true, "weight": 3}
+            ).addTo(map_02c2862b055e3c40867a141de38fd0f9);
+        
+    
+        var popup_427366d4bf24c60a785fdc6df417db9f = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_e0529e3a6d8cd7185a668deab8b9742f = $(`<div id="html_e0529e3a6d8cd7185a668deab8b9742f" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Malgun Gothic; width:280px">             <h4>옥천군</h4>             <hr>             <b>인구 (2025):</b> 25,801세대<br>             <b>인구 증감 (8년):</b> <span style="color:darkblue">10.78%</span><br>             <br>             <b>핵심 지표:</b>             <ul>                 <li>도로율: 3.15%</li>                 <li>공장용지: 0.54%</li>                 <li>대지(주거): 2.12%</li>             </ul>         </div>         </div>`)[0];
+                popup_427366d4bf24c60a785fdc6df417db9f.setContent(html_e0529e3a6d8cd7185a668deab8b9742f);
+            
+        
+
+        circle_marker_cf01bea757a32598e0f125923c704d37.bindPopup(popup_427366d4bf24c60a785fdc6df417db9f)
+        ;
+
+        
+    
+    
+            circle_marker_cf01bea757a32598e0f125923c704d37.bindTooltip(
+                `<div>
+                     옥천군 (10.8%)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1544f47bbe2a23f29783021ddce98000 = L.circleMarker(
+                [36.1748, 127.7769],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_02c2862b055e3c40867a141de38fd0f9);
+        
+    
+        var popup_d95522218169828adef3d5276185cd29 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_8715c5c2e42936c85c4b381868448d70 = $(`<div id="html_8715c5c2e42936c85c4b381868448d70" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Malgun Gothic; width:280px">             <h4>영동군</h4>             <hr>             <b>인구 (2025):</b> 23,568세대<br>             <b>인구 증감 (8년):</b> <span style="color:orange">-2.34%</span><br>             <br>             <b>핵심 지표:</b>             <ul>                 <li>도로율: 2.24%</li>                 <li>공장용지: 0.25%</li>                 <li>대지(주거): 1.26%</li>             </ul>         </div>         </div>`)[0];
+                popup_d95522218169828adef3d5276185cd29.setContent(html_8715c5c2e42936c85c4b381868448d70);
+            
+        
+
+        circle_marker_1544f47bbe2a23f29783021ddce98000.bindPopup(popup_d95522218169828adef3d5276185cd29)
+        ;
+
+        
+    
+    
+            circle_marker_1544f47bbe2a23f29783021ddce98000.bindTooltip(
+                `<div>
+                     영동군 (-2.3%)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3a2636a3c9ed8c68d3532f7740b475c9 = L.circleMarker(
+                [36.7853, 127.5814],
+                {"bubblingMouseEvents": true, "color": "darkblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 19.263088534802925, "stroke": true, "weight": 3}
+            ).addTo(map_02c2862b055e3c40867a141de38fd0f9);
+        
+    
+        var popup_611c12faa85c9d5938d990049048eebc = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_777c9d5242910614e78f5c2148a399ad = $(`<div id="html_777c9d5242910614e78f5c2148a399ad" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Malgun Gothic; width:280px">             <h4>증평군</h4>             <hr>             <b>인구 (2025):</b> 19,119세대<br>             <b>인구 증감 (8년):</b> <span style="color:darkblue">14.53%</span><br>             <br>             <b>핵심 지표:</b>             <ul>                 <li>도로율: 5.00%</li>                 <li>공장용지: 2.60%</li>                 <li>대지(주거): 5.67%</li>             </ul>         </div>         </div>`)[0];
+                popup_611c12faa85c9d5938d990049048eebc.setContent(html_777c9d5242910614e78f5c2148a399ad);
+            
+        
+
+        circle_marker_3a2636a3c9ed8c68d3532f7740b475c9.bindPopup(popup_611c12faa85c9d5938d990049048eebc)
+        ;
+
+        
+    
+    
+            circle_marker_3a2636a3c9ed8c68d3532f7740b475c9.bindTooltip(
+                `<div>
+                     증평군 (14.5%)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_fcb41595698d2adec37fa4e0a222195f = L.circleMarker(
+                [36.8553, 127.4355],
+                {"bubblingMouseEvents": true, "color": "darkblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 27.33071919265609, "stroke": true, "weight": 3}
+            ).addTo(map_02c2862b055e3c40867a141de38fd0f9);
+        
+    
+        var popup_29b9aef513f57118df3b2e8e8db88678 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_8a88947fcbbaaccde4bd1d49268648de = $(`<div id="html_8a88947fcbbaaccde4bd1d49268648de" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Malgun Gothic; width:280px">             <h4>진천군</h4>             <hr>             <b>인구 (2025):</b> 42,985세대<br>             <b>인구 증감 (8년):</b> <span style="color:darkblue">30.66%</span><br>             <br>             <b>핵심 지표:</b>             <ul>                 <li>도로율: 4.14%</li>                 <li>공장용지: 3.64%</li>                 <li>대지(주거): 3.04%</li>             </ul>         </div>         </div>`)[0];
+                popup_29b9aef513f57118df3b2e8e8db88678.setContent(html_8a88947fcbbaaccde4bd1d49268648de);
+            
+        
+
+        circle_marker_fcb41595698d2adec37fa4e0a222195f.bindPopup(popup_29b9aef513f57118df3b2e8e8db88678)
+        ;
+
+        
+    
+    
+            circle_marker_fcb41595698d2adec37fa4e0a222195f.bindTooltip(
+                `<div>
+                     진천군 (30.7%)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_634766a0ad515949c2a07c4a86076f3d = L.circleMarker(
+                [36.8153, 127.7865],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 13.591582835204354, "stroke": true, "weight": 3}
+            ).addTo(map_02c2862b055e3c40867a141de38fd0f9);
+        
+    
+        var popup_ed7abedf107919098c0ad0da24e543c8 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_08992ce5d29378aca9337c54d49501f5 = $(`<div id="html_08992ce5d29378aca9337c54d49501f5" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Malgun Gothic; width:280px">             <h4>괴산군</h4>             <hr>             <b>인구 (2025):</b> 21,232세대<br>             <b>인구 증감 (8년):</b> <span style="color:blue">3.18%</span><br>             <br>             <b>핵심 지표:</b>             <ul>                 <li>도로율: 2.51%</li>                 <li>공장용지: 0.46%</li>                 <li>대지(주거): 1.67%</li>             </ul>         </div>         </div>`)[0];
+                popup_ed7abedf107919098c0ad0da24e543c8.setContent(html_08992ce5d29378aca9337c54d49501f5);
+            
+        
+
+        circle_marker_634766a0ad515949c2a07c4a86076f3d.bindPopup(popup_ed7abedf107919098c0ad0da24e543c8)
+        ;
+
+        
+    
+    
+            circle_marker_634766a0ad515949c2a07c4a86076f3d.bindTooltip(
+                `<div>
+                     괴산군 (3.2%)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a1e0f683eba6eaea8941d8210852110b = L.circleMarker(
+                [36.9403, 127.6905],
+                {"bubblingMouseEvents": true, "color": "darkblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18.50558033237924, "stroke": true, "weight": 3}
+            ).addTo(map_02c2862b055e3c40867a141de38fd0f9);
+        
+    
+        var popup_a275569a39839e6479eab44e41aa609b = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_f5408327054066efe296fa00dcc11614 = $(`<div id="html_f5408327054066efe296fa00dcc11614" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Malgun Gothic; width:280px">             <h4>음성군</h4>             <hr>             <b>인구 (2025):</b> 50,933세대<br>             <b>인구 증감 (8년):</b> <span style="color:darkblue">13.01%</span><br>             <br>             <b>핵심 지표:</b>             <ul>                 <li>도로율: 4.61%</li>                 <li>공장용지: 4.85%</li>                 <li>대지(주거): 3.42%</li>             </ul>         </div>         </div>`)[0];
+                popup_a275569a39839e6479eab44e41aa609b.setContent(html_f5408327054066efe296fa00dcc11614);
+            
+        
+
+        circle_marker_a1e0f683eba6eaea8941d8210852110b.bindPopup(popup_a275569a39839e6479eab44e41aa609b)
+        ;
+
+        
+    
+    
+            circle_marker_a1e0f683eba6eaea8941d8210852110b.bindTooltip(
+                `<div>
+                     음성군 (13.0%)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0bc2b1decd77158c2897f93a3d0f289d = L.circleMarker(
+                [36.9845, 128.3655],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 13.582792207792208, "stroke": true, "weight": 3}
+            ).addTo(map_02c2862b055e3c40867a141de38fd0f9);
+        
+    
+        var popup_26909b347caf001ee20bec8fb61c496c = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_87593c91107674e7c18454b5708aa9fa = $(`<div id="html_87593c91107674e7c18454b5708aa9fa" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Malgun Gothic; width:280px">             <h4>단양군</h4>             <hr>             <b>인구 (2025):</b> 15,252세대<br>             <b>인구 증감 (8년):</b> <span style="color:blue">3.17%</span><br>             <br>             <b>핵심 지표:</b>             <ul>                 <li>도로율: 1.87%</li>                 <li>공장용지: 0.30%</li>                 <li>대지(주거): 0.91%</li>             </ul>         </div>         </div>`)[0];
+                popup_26909b347caf001ee20bec8fb61c496c.setContent(html_87593c91107674e7c18454b5708aa9fa);
+            
+        
+
+        circle_marker_0bc2b1decd77158c2897f93a3d0f289d.bindPopup(popup_26909b347caf001ee20bec8fb61c496c)
+        ;
+
+        
+    
+    
+            circle_marker_0bc2b1decd77158c2897f93a3d0f289d.bindTooltip(
+                `<div>
+                     단양군 (3.2%)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+</script>
+</html>

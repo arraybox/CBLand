@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_5b53e9dc3c7036c44c4c3a6cf6f919c2 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_5b53e9dc3c7036c44c4c3a6cf6f919c2" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_5b53e9dc3c7036c44c4c3a6cf6f919c2 = L.map(
+                "map_5b53e9dc3c7036c44c4c3a6cf6f919c2",
+                {
+                    center: [36.8, 127.7],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 9,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_688f5f2a8e53bba1632f56b22d829e64 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_688f5f2a8e53bba1632f56b22d829e64.addTo(map_5b53e9dc3c7036c44c4c3a6cf6f919c2);
+        
+    
+            var circle_marker_3590a1f0570a6a5c227231f48b684cb9 = L.circleMarker(
+                [36.5746, 127.5252],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.47981715, "stroke": true, "weight": 3}
+            ).addTo(map_5b53e9dc3c7036c44c4c3a6cf6f919c2);
+        
+    
+        var popup_3c8ffba0583ab781626cea1e495a9443 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_954432ddfdc00da74e335230e427d9c0 = $(`<div id="html_954432ddfdc00da74e335230e427d9c0" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Malgun Gothic; width:250px">             <h4>청주 상당구 (농업/산림형)</h4>             <hr>             <b>인구 증감:</b> 28.3%<br>             <br>             <b>토지 면적 (2025):</b><br>             - 공장: 959,634<br>             - 임야: 267,003,438<br>             - 대지: 14,844,499<br>         </div>         </div>`)[0];
+                popup_3c8ffba0583ab781626cea1e495a9443.setContent(html_954432ddfdc00da74e335230e427d9c0);
+            
+        
+
+        circle_marker_3590a1f0570a6a5c227231f48b684cb9.bindPopup(popup_3c8ffba0583ab781626cea1e495a9443)
+        ;
+
+        
+    
+    
+            circle_marker_3590a1f0570a6a5c227231f48b684cb9.bindTooltip(
+                `<div>
+                     청주 상당구 (농업/산림형)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c252d7029f02f40426bff2d037908e05 = L.circleMarker(
+                [36.5786, 127.4597],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11.5745168, "stroke": true, "weight": 3}
+            ).addTo(map_5b53e9dc3c7036c44c4c3a6cf6f919c2);
+        
+    
+        var popup_871ccb83ffe9df837e71ddc452977062 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_8a8cca95e1c0a3f251bc307b12a784c8 = $(`<div id="html_8a8cca95e1c0a3f251bc307b12a784c8" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Malgun Gothic; width:250px">             <h4>청주 서원구 (균형형)</h4>             <hr>             <b>인구 증감:</b> 1.1%<br>             <br>             <b>토지 면적 (2025):</b><br>             - 공장: 3,149,034<br>             - 임야: 59,145,780<br>             - 대지: 11,733,303<br>         </div>         </div>`)[0];
+                popup_871ccb83ffe9df837e71ddc452977062.setContent(html_8a8cca95e1c0a3f251bc307b12a784c8);
+            
+        
+
+        circle_marker_c252d7029f02f40426bff2d037908e05.bindPopup(popup_871ccb83ffe9df837e71ddc452977062)
+        ;
+
+        
+    
+    
+            circle_marker_c252d7029f02f40426bff2d037908e05.bindTooltip(
+                `<div>
+                     청주 서원구 (균형형)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_38c00a4afbe4de81f90cf4f37f68f3ec = L.circleMarker(
+                [36.6346, 127.4278],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 16.4765735, "stroke": true, "weight": 3}
+            ).addTo(map_5b53e9dc3c7036c44c4c3a6cf6f919c2);
+        
+    
+        var popup_0e87a25d71fc6130e8ece8ee139951cb = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_d1878b9bc4fd9774923c798f73ef5b03 = $(`<div id="html_d1878b9bc4fd9774923c798f73ef5b03" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Malgun Gothic; width:250px">             <h4>청주 흥덕구 (도시/산업형)</h4>             <hr>             <b>인구 증감:</b> 30.8%<br>             <br>             <b>토지 면적 (2025):</b><br>             - 공장: 12,953,147<br>             - 임야: 66,537,054<br>             - 대지: 18,242,336<br>         </div>         </div>`)[0];
+                popup_0e87a25d71fc6130e8ece8ee139951cb.setContent(html_d1878b9bc4fd9774923c798f73ef5b03);
+            
+        
+
+        circle_marker_38c00a4afbe4de81f90cf4f37f68f3ec.bindPopup(popup_0e87a25d71fc6130e8ece8ee139951cb)
+        ;
+
+        
+    
+    
+            circle_marker_38c00a4afbe4de81f90cf4f37f68f3ec.bindTooltip(
+                `<div>
+                     청주 흥덕구 (도시/산업형)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6a15d7dbaa9a3bd9cf8c093368012cb3 = L.circleMarker(
+                [36.7118, 127.5255],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 14.7048144, "stroke": true, "weight": 3}
+            ).addTo(map_5b53e9dc3c7036c44c4c3a6cf6f919c2);
+        
+    
+        var popup_03845a750c4ce43d656135e94b6b2384 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_90c6c3b696577f174f89fe5940608c19 = $(`<div id="html_90c6c3b696577f174f89fe5940608c19" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Malgun Gothic; width:250px">             <h4>청주 청원구 (도시/산업형)</h4>             <hr>             <b>인구 증감:</b> 12.2%<br>             <br>             <b>토지 면적 (2025):</b><br>             - 공장: 9,409,629<br>             - 임야: 71,666,135<br>             - 대지: 15,133,082<br>         </div>         </div>`)[0];
+                popup_03845a750c4ce43d656135e94b6b2384.setContent(html_90c6c3b696577f174f89fe5940608c19);
+            
+        
+
+        circle_marker_6a15d7dbaa9a3bd9cf8c093368012cb3.bindPopup(popup_03845a750c4ce43d656135e94b6b2384)
+        ;
+
+        
+    
+    
+            circle_marker_6a15d7dbaa9a3bd9cf8c093368012cb3.bindTooltip(
+                `<div>
+                     청주 청원구 (도시/산업형)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7a7bb7a430955c2c07fa3b176d471582 = L.circleMarker(
+                [36.9915, 127.9259],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 15.9010627, "stroke": true, "weight": 3}
+            ).addTo(map_5b53e9dc3c7036c44c4c3a6cf6f919c2);
+        
+    
+        var popup_9de90e11ade8cf01db32fd83269342db = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_4a8d9b4405755ad3b4da22e43b835a96 = $(`<div id="html_4a8d9b4405755ad3b4da22e43b835a96" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Malgun Gothic; width:250px">             <h4>충주시 (농업/산림형)</h4>             <hr>             <b>인구 증감:</b> 15.9%<br>             <br>             <b>토지 면적 (2025):</b><br>             - 공장: 11,802,125<br>             - 임야: 610,603,458<br>             - 대지: 28,019,806<br>         </div>         </div>`)[0];
+                popup_9de90e11ade8cf01db32fd83269342db.setContent(html_4a8d9b4405755ad3b4da22e43b835a96);
+            
+        
+
+        circle_marker_7a7bb7a430955c2c07fa3b176d471582.bindPopup(popup_9de90e11ade8cf01db32fd83269342db)
+        ;
+
+        
+    
+    
+            circle_marker_7a7bb7a430955c2c07fa3b176d471582.bindTooltip(
+                `<div>
+                     충주시 (농업/산림형)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2b512b2b5000593a980f93eb7918173b = L.circleMarker(
+                [37.1326, 128.1909],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12.17556655, "stroke": true, "weight": 3}
+            ).addTo(map_5b53e9dc3c7036c44c4c3a6cf6f919c2);
+        
+    
+        var popup_d75bec70dc6fc50a7cae57ad380c3989 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_eec8a8237a8a1383949219636bde7d85 = $(`<div id="html_eec8a8237a8a1383949219636bde7d85" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Malgun Gothic; width:250px">             <h4>제천시 (농업/산림형)</h4>             <hr>             <b>인구 증감:</b> 7.2%<br>             <br>             <b>토지 면적 (2025):</b><br>             - 공장: 4,351,133<br>             - 임야: 640,213,626<br>             - 대지: 17,386,195<br>         </div>         </div>`)[0];
+                popup_d75bec70dc6fc50a7cae57ad380c3989.setContent(html_eec8a8237a8a1383949219636bde7d85);
+            
+        
+
+        circle_marker_2b512b2b5000593a980f93eb7918173b.bindPopup(popup_d75bec70dc6fc50a7cae57ad380c3989)
+        ;
+
+        
+    
+    
+            circle_marker_2b512b2b5000593a980f93eb7918173b.bindTooltip(
+                `<div>
+                     제천시 (농업/산림형)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_33ca6e2f0dfa8f1d927bb4b998f7ed19 = L.circleMarker(
+                [36.4893, 127.729],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11.11241735, "stroke": true, "weight": 3}
+            ).addTo(map_5b53e9dc3c7036c44c4c3a6cf6f919c2);
+        
+    
+        var popup_58fb61d8da62f268b14244793ee1878e = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_74891285d61237651cc8f5913075197d = $(`<div id="html_74891285d61237651cc8f5913075197d" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Malgun Gothic; width:250px">             <h4>보은군 (농업/산림형)</h4>             <hr>             <b>인구 증감:</b> 1.8%<br>             <br>             <b>토지 면적 (2025):</b><br>             - 공장: 2,224,835<br>             - 임야: 398,248,708<br>             - 대지: 9,720,004<br>         </div>         </div>`)[0];
+                popup_58fb61d8da62f268b14244793ee1878e.setContent(html_74891285d61237651cc8f5913075197d);
+            
+        
+
+        circle_marker_33ca6e2f0dfa8f1d927bb4b998f7ed19.bindPopup(popup_58fb61d8da62f268b14244793ee1878e)
+        ;
+
+        
+    
+    
+            circle_marker_33ca6e2f0dfa8f1d927bb4b998f7ed19.bindTooltip(
+                `<div>
+                     보은군 (농업/산림형)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9722825b84904f0aab64e29333b85445 = L.circleMarker(
+                [36.3063, 127.5714],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11.45571885, "stroke": true, "weight": 3}
+            ).addTo(map_5b53e9dc3c7036c44c4c3a6cf6f919c2);
+        
+    
+        var popup_d30f3a7356e988cb908c2baf40e2d94c = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_4aa585a09f386f3d0ea91942970b424b = $(`<div id="html_4aa585a09f386f3d0ea91942970b424b" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Malgun Gothic; width:250px">             <h4>옥천군 (농업/산림형)</h4>             <hr>             <b>인구 증감:</b> 10.8%<br>             <br>             <b>토지 면적 (2025):</b><br>             - 공장: 2,911,438<br>             - 임야: 344,334,686<br>             - 대지: 11,367,953<br>         </div>         </div>`)[0];
+                popup_d30f3a7356e988cb908c2baf40e2d94c.setContent(html_4aa585a09f386f3d0ea91942970b424b);
+            
+        
+
+        circle_marker_9722825b84904f0aab64e29333b85445.bindPopup(popup_d30f3a7356e988cb908c2baf40e2d94c)
+        ;
+
+        
+    
+    
+            circle_marker_9722825b84904f0aab64e29333b85445.bindTooltip(
+                `<div>
+                     옥천군 (농업/산림형)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b815a554f5bb85d179cec2bc1447c23b = L.circleMarker(
+                [36.1748, 127.7769],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11.04851525, "stroke": true, "weight": 3}
+            ).addTo(map_5b53e9dc3c7036c44c4c3a6cf6f919c2);
+        
+    
+        var popup_2da7c1af982a683d1ae6b25557f28765 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_9d052222a8637c91959b0010746b10e9 = $(`<div id="html_9d052222a8637c91959b0010746b10e9" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Malgun Gothic; width:250px">             <h4>영동군 (농업/산림형)</h4>             <hr>             <b>인구 증감:</b> -2.3%<br>             <br>             <b>토지 면적 (2025):</b><br>             - 공장: 2,097,030<br>             - 임야: 651,350,488<br>             - 대지: 10,664,331<br>         </div>         </div>`)[0];
+                popup_2da7c1af982a683d1ae6b25557f28765.setContent(html_9d052222a8637c91959b0010746b10e9);
+            
+        
+
+        circle_marker_b815a554f5bb85d179cec2bc1447c23b.bindPopup(popup_2da7c1af982a683d1ae6b25557f28765)
+        ;
+
+        
+    
+    
+            circle_marker_b815a554f5bb85d179cec2bc1447c23b.bindTooltip(
+                `<div>
+                     영동군 (농업/산림형)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c40cbe2b2242e17471714af2b10c02a7 = L.circleMarker(
+                [36.7853, 127.5814],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11.0617123, "stroke": true, "weight": 3}
+            ).addTo(map_5b53e9dc3c7036c44c4c3a6cf6f919c2);
+        
+    
+        var popup_a1d4b1d23dce8001eec5b10f4593528c = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_78e417dff68f081b3e3aea07eb9f2344 = $(`<div id="html_78e417dff68f081b3e3aea07eb9f2344" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Malgun Gothic; width:250px">             <h4>증평군 (균형형)</h4>             <hr>             <b>인구 증감:</b> 14.5%<br>             <br>             <b>토지 면적 (2025):</b><br>             - 공장: 2,123,425<br>             - 임야: 39,641,068<br>             - 대지: 4,635,846<br>         </div>         </div>`)[0];
+                popup_a1d4b1d23dce8001eec5b10f4593528c.setContent(html_78e417dff68f081b3e3aea07eb9f2344);
+            
+        
+
+        circle_marker_c40cbe2b2242e17471714af2b10c02a7.bindPopup(popup_a1d4b1d23dce8001eec5b10f4593528c)
+        ;
+
+        
+    
+    
+            circle_marker_c40cbe2b2242e17471714af2b10c02a7.bindTooltip(
+                `<div>
+                     증평군 (균형형)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7f5a8ba3c1c220d0406a9e0b5080a349 = L.circleMarker(
+                [36.8553, 127.4355],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.42340335, "stroke": true, "weight": 3}
+            ).addTo(map_5b53e9dc3c7036c44c4c3a6cf6f919c2);
+        
+    
+        var popup_a8a51c3a3262494d69ddba2fa230652d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_4e5fec2bd872baa1c9b6a1a48dd9c9ea = $(`<div id="html_4e5fec2bd872baa1c9b6a1a48dd9c9ea" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Malgun Gothic; width:250px">             <h4>진천군 (도시/산업형)</h4>             <hr>             <b>인구 증감:</b> 30.7%<br>             <br>             <b>토지 면적 (2025):</b><br>             - 공장: 14,846,807<br>             - 임야: 225,244,177<br>             - 대지: 12,387,449<br>         </div>         </div>`)[0];
+                popup_a8a51c3a3262494d69ddba2fa230652d.setContent(html_4e5fec2bd872baa1c9b6a1a48dd9c9ea);
+            
+        
+
+        circle_marker_7f5a8ba3c1c220d0406a9e0b5080a349.bindPopup(popup_a8a51c3a3262494d69ddba2fa230652d)
+        ;
+
+        
+    
+    
+            circle_marker_7f5a8ba3c1c220d0406a9e0b5080a349.bindTooltip(
+                `<div>
+                     진천군 (도시/산업형)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e47b36e008d377bfdd30ec187923a8b9 = L.circleMarker(
+                [36.8153, 127.7865],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11.9192412, "stroke": true, "weight": 3}
+            ).addTo(map_5b53e9dc3c7036c44c4c3a6cf6f919c2);
+        
+    
+        var popup_685e0be3d04144a8e66f8799a56db7cc = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_7ba501a720ed6bcba5780260ec7bbb4e = $(`<div id="html_7ba501a720ed6bcba5780260ec7bbb4e" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Malgun Gothic; width:250px">             <h4>괴산군 (농업/산림형)</h4>             <hr>             <b>인구 증감:</b> 3.2%<br>             <br>             <b>토지 면적 (2025):</b><br>             - 공장: 3,838,482<br>             - 임야: 620,159,800<br>             - 대지: 14,080,667<br>         </div>         </div>`)[0];
+                popup_685e0be3d04144a8e66f8799a56db7cc.setContent(html_7ba501a720ed6bcba5780260ec7bbb4e);
+            
+        
+
+        circle_marker_e47b36e008d377bfdd30ec187923a8b9.bindPopup(popup_685e0be3d04144a8e66f8799a56db7cc)
+        ;
+
+        
+    
+    
+            circle_marker_e47b36e008d377bfdd30ec187923a8b9.bindTooltip(
+                `<div>
+                     괴산군 (농업/산림형)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d42f4f05e33245acf17a708dc3a2b2b6 = L.circleMarker(
+                [36.9403, 127.6905],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 22.6203066, "stroke": true, "weight": 3}
+            ).addTo(map_5b53e9dc3c7036c44c4c3a6cf6f919c2);
+        
+    
+        var popup_d35a478b15898e929c0b69f7024cf848 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_d4c8adb53393e836d55aad218f991abe = $(`<div id="html_d4c8adb53393e836d55aad218f991abe" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Malgun Gothic; width:250px">             <h4>음성군 (도시/산업형)</h4>             <hr>             <b>인구 증감:</b> 13.0%<br>             <br>             <b>토지 면적 (2025):</b><br>             - 공장: 25,240,613<br>             - 임야: 262,565,513<br>             - 대지: 17,790,948<br>         </div>         </div>`)[0];
+                popup_d35a478b15898e929c0b69f7024cf848.setContent(html_d4c8adb53393e836d55aad218f991abe);
+            
+        
+
+        circle_marker_d42f4f05e33245acf17a708dc3a2b2b6.bindPopup(popup_d35a478b15898e929c0b69f7024cf848)
+        ;
+
+        
+    
+    
+            circle_marker_d42f4f05e33245acf17a708dc3a2b2b6.bindTooltip(
+                `<div>
+                     음성군 (도시/산업형)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_910ea7a8c25aefe06e3f0e6ac7db61d6 = L.circleMarker(
+                [36.9845, 128.3655],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11.1531927, "stroke": true, "weight": 3}
+            ).addTo(map_5b53e9dc3c7036c44c4c3a6cf6f919c2);
+        
+    
+        var popup_95b73971809d5ea339ea58fdcda84ab3 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_201f458eef74f637ad43d1de5a5047da = $(`<div id="html_201f458eef74f637ad43d1de5a5047da" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Malgun Gothic; width:250px">             <h4>단양군 (농업/산림형)</h4>             <hr>             <b>인구 증감:</b> 3.2%<br>             <br>             <b>토지 면적 (2025):</b><br>             - 공장: 2,306,385<br>             - 임야: 640,079,071<br>             - 대지: 7,083,519<br>         </div>         </div>`)[0];
+                popup_95b73971809d5ea339ea58fdcda84ab3.setContent(html_201f458eef74f637ad43d1de5a5047da);
+            
+        
+
+        circle_marker_910ea7a8c25aefe06e3f0e6ac7db61d6.bindPopup(popup_95b73971809d5ea339ea58fdcda84ab3)
+        ;
+
+        
+    
+    
+            circle_marker_910ea7a8c25aefe06e3f0e6ac7db61d6.bindTooltip(
+                `<div>
+                     단양군 (농업/산림형)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+</script>
+</html>

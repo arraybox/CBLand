@@ -1,0 +1,20 @@
+
+--- Population File (cp949) ---
+['충청북도' '청주시' '상당구' '서원구' '흥덕구' '청원구' '충주시' '제천시' '보은군' '옥천군' '영동군' '증평군'
+ '진천군' '괴산군' '음성군' '단양군']
+
+--- Land File (cp949) ---
+['청주 상당구' '청주 서원구' '청주 흥덕구' '청주 청원구' '충주시' '제천시' '보은군' '옥천군' '영동군' '증평군'
+ '진천군' '괴산군' '음성군' '단양군']
+
+--- Population File (euc-kr) ---
+['충청북도' '청주시' '상당구' '서원구' '흥덕구' '청원구' '충주시' '제천시' '보은군' '옥천군' '영동군' '증평군'
+ '진천군' '괴산군' '음성군' '단양군']
+
+--- Land File (euc-kr) ---
+['청주 상당구' '청주 서원구' '청주 흥덕구' '청주 청원구' '충주시' '제천시' '보은군' '옥천군' '영동군' '증평군'
+ '진천군' '괴산군' '음성군' '단양군']
+
+Error reading D:\GITHUB\CBLand\data\행정구역_시군구_별_주민등록세대수_20251207114706.csv with utf-8: 'utf-8' codec can't decode byte 0xc7 in position 0: invalid continuation byte
+
+Error reading D:\GITHUB\CBLand\original_data\충청북도_지적통계_20250630.csv with utf-8: 'utf-8' codec can't decode byte 0xc5 in position 0: invalid continuation byte
