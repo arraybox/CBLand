@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>충북 행정구역 라벨 드래그앤드롭(기본 위치 Always ON)</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+      #map { height: 100vh; width: 100vw; }
+      .legend { position: fixed; bottom: 50px; right: 50px; background: white; z-index:999; padding:12px 18px;}
+      #info-box {
+        position:fixed; top:20px; right:350px; min-width:250px; max-width:340px; background:#fcfcfc;
+        border:2px solid #333; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.10);
+        font-size:15px; padding:18px 20px; color:#222; z-index:2500; display:none;
+      }
+      .my-label {
+        background:rgba(255,255,255,0.97); color:#333; border-radius:7px;
+        border:1px solid #bbb; box-shadow:0 1px 4px rgba(0,0,0,0.11); padding:7px 13px;
+        font-size:15px; line-height:1.45; font-family:'Malgun Gothic',sans-serif;
+        font-weight:bold; pointer-events:auto; min-width:195px;
+      }
+    </style>
+</head>
+<body>
+  <div id="map"></div>
+  <div class="legend">
+    <b>군집분류:</b>
+    <span style="color:#ff6b35;">●</span> 도시/산업형
+    <span style="color:#4caf50;">●</span> 농업/산림형
+    <span style="color:#9c27b0;">●</span> 균형형
+  </div>
+  <div id="info-box"></div>
+  <script>
+    var data = [{"\ud589\uc815\uad6c\uc5ed\uba85":"\uccad\uc8fc \uc0c1\ub2f9\uad6c","\uc704\ub3c4":36.642885,"\uacbd\ub3c4":127.515223,"\uad70\uc9d1_\ub77c\ubca8":"\ub18d\uc5c5\/\uc0b0\ub9bc\ud615","\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ubcc0\ud654\uc728":21.24,"\uc784\uc57c\uba74\uc801_\ube44\uc728":76.68,"\ub18d\uacbd\uc9c0\uba74\uc801_\ube44\uc728":18.78,"\ub300\uc9c0\uba74\uc801_\ube44\uc728":4.26,"\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ube44\uc728":0.28},{"\ud589\uc815\uad6c\uc5ed\uba85":"\uccad\uc8fc \uc11c\uc6d0\uad6c","\uc704\ub3c4":36.624329,"\uacbd\ub3c4":127.478089,"\uad70\uc9d1_\ub77c\ubca8":"\uade0\ud615\ud615","\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ubcc0\ud654\uc728":22.88,"\uc784\uc57c\uba74\uc801_\ube44\uc728":59.17,"\ub18d\uacbd\uc9c0\uba74\uc801_\ube44\uc728":25.94,"\ub300\uc9c0\uba74\uc801_\ube44\uc728":11.74,"\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ube44\uc728":3.15},{"\ud589\uc815\uad6c\uc5ed\uba85":"\uccad\uc8fc \ud765\ub355\uad6c","\uc704\ub3c4":36.64236,"\uacbd\ub3c4":127.424378,"\uad70\uc9d1_\ub77c\ubca8":"\ub3c4\uc2dc\/\uc0b0\uc5c5\ud615","\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ubcc0\ud654\uc728":22.84,"\uc784\uc57c\uba74\uc801_\ube44\uc728":43.63,"\ub18d\uacbd\uc9c0\uba74\uc801_\ube44\uc728":35.91,"\ub300\uc9c0\uba74\uc801_\ube44\uc728":11.96,"\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ube44\uc728":8.49},{"\ud589\uc815\uad6c\uc5ed\uba85":"\uccad\uc8fc \uccad\uc6d0\uad6c","\uc704\ub3c4":36.724972,"\uacbd\ub3c4":127.491345,"\uad70\uc9d1_\ub77c\ubca8":"\ub3c4\uc2dc\/\uc0b0\uc5c5\ud615","\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ubcc0\ud654\uc728":34.05,"\uc784\uc57c\uba74\uc801_\ube44\uc728":44.74,"\ub18d\uacbd\uc9c0\uba74\uc801_\ube44\uc728":39.94,"\ub300\uc9c0\uba74\uc801_\ube44\uc728":9.45,"\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ube44\uc728":5.87},{"\ud589\uc815\uad6c\uc5ed\uba85":"\ucda9\uc8fc\uc2dc","\uc704\ub3c4":36.991016,"\uacbd\ub3c4":127.926753,"\uad70\uc9d1_\ub77c\ubca8":"\ub18d\uc5c5\/\uc0b0\ub9bc\ud615","\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ubcc0\ud654\uc728":17.65,"\uc784\uc57c\uba74\uc801_\ube44\uc728":75.92,"\ub18d\uacbd\uc9c0\uba74\uc801_\ube44\uc728":19.13,"\ub300\uc9c0\uba74\uc801_\ube44\uc728":3.48,"\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ube44\uc728":1.47},{"\ud589\uc815\uad6c\uc5ed\uba85":"\uc81c\ucc9c\uc2dc","\uc704\ub3c4":37.132646,"\uacbd\ub3c4":128.19384,"\uad70\uc9d1_\ub77c\ubca8":"\ub18d\uc5c5\/\uc0b0\ub9bc\ud615","\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ubcc0\ud654\uc728":22.69,"\uc784\uc57c\uba74\uc801_\ube44\uc728":83.29,"\ub18d\uacbd\uc9c0\uba74\uc801_\ube44\uc728":13.88,"\ub300\uc9c0\uba74\uc801_\ube44\uc728":2.26,"\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ube44\uc728":0.57},{"\ud589\uc815\uad6c\uc5ed\uba85":"\ubcf4\uc740\uad70","\uc704\ub3c4":36.489419,"\uacbd\ub3c4":127.729899,"\uad70\uc9d1_\ub77c\ubca8":"\ub18d\uc5c5\/\uc0b0\ub9bc\ud615","\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ubcc0\ud654\uc728":14.7,"\uc784\uc57c\uba74\uc801_\ube44\uc728":76.67,"\ub18d\uacbd\uc9c0\uba74\uc801_\ube44\uc728":21.03,"\ub300\uc9c0\uba74\uc801_\ube44\uc728":1.87,"\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ube44\uc728":0.43},{"\ud589\uc815\uad6c\uc5ed\uba85":"\uc625\ucc9c\uad70","\uc704\ub3c4":36.306176,"\uacbd\ub3c4":127.575715,"\uad70\uc9d1_\ub77c\ubca8":"\ub18d\uc5c5\/\uc0b0\ub9bc\ud615","\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ubcc0\ud654\uc728":16.07,"\uc784\uc57c\uba74\uc801_\ube44\uc728":75.52,"\ub18d\uacbd\uc9c0\uba74\uc801_\ube44\uc728":21.34,"\ub300\uc9c0\uba74\uc801_\ube44\uc728":2.49,"\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ube44\uc728":0.64},{"\ud589\uc815\uad6c\uc5ed\uba85":"\uc601\ub3d9\uad70","\uc704\ub3c4":36.17512,"\uacbd\ub3c4":127.788542,"\uad70\uc9d1_\ub77c\ubca8":"\ub18d\uc5c5\/\uc0b0\ub9bc\ud615","\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ubcc0\ud654\uc728":47.95,"\uc784\uc57c\uba74\uc801_\ube44\uc728":85.01,"\ub18d\uacbd\uc9c0\uba74\uc801_\ube44\uc728":13.33,"\ub300\uc9c0\uba74\uc801_\ube44\uc728":1.39,"\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ube44\uc728":0.27},{"\ud589\uc815\uad6c\uc5ed\uba85":"\uc99d\ud3c9\uad70","\uc704\ub3c4":36.785371,"\uacbd\ub3c4":127.584968,"\uad70\uc9d1_\ub77c\ubca8":"\uade0\ud615\ud615","\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ubcc0\ud654\uc728":11.38,"\uc784\uc57c\uba74\uc801_\ube44\uc728":57.84,"\ub18d\uacbd\uc9c0\uba74\uc801_\ube44\uc728":32.3,"\ub300\uc9c0\uba74\uc801_\ube44\uc728":6.76,"\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ube44\uc728":3.1},{"\ud589\uc815\uad6c\uc5ed\uba85":"\uc9c4\ucc9c\uad70","\uc704\ub3c4":36.852834,"\uacbd\ub3c4":127.438514,"\uad70\uc9d1_\ub77c\ubca8":"\ub3c4\uc2dc\/\uc0b0\uc5c5\ud615","\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ubcc0\ud654\uc728":21.13,"\uc784\uc57c\uba74\uc801_\ube44\uc728":65.8,"\ub18d\uacbd\uc9c0\uba74\uc801_\ube44\uc728":26.25,"\ub300\uc9c0\uba74\uc801_\ube44\uc728":3.62,"\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ube44\uc728":4.34},{"\ud589\uc815\uad6c\uc5ed\uba85":"\uad34\uc0b0\uad70","\uc704\ub3c4":36.815086,"\uacbd\ub3c4":127.792419,"\uad70\uc9d1_\ub77c\ubca8":"\ub18d\uc5c5\/\uc0b0\ub9bc\ud615","\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ubcc0\ud654\uc728":20.72,"\uc784\uc57c\uba74\uc801_\ube44\uc728":80.56,"\ub18d\uacbd\uc9c0\uba74\uc801_\ube44\uc728":17.11,"\ub300\uc9c0\uba74\uc801_\ube44\uc728":1.83,"\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ube44\uc728":0.5},{"\ud589\uc815\uad6c\uc5ed\uba85":"\uc74c\uc131\uad70","\uc704\ub3c4":36.940568,"\uacbd\ub3c4":127.692842,"\uad70\uc9d1_\ub77c\ubca8":"\ub3c4\uc2dc\/\uc0b0\uc5c5\ud615","\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ubcc0\ud654\uc728":25.62,"\uc784\uc57c\uba74\uc801_\ube44\uc728":60.32,"\ub18d\uacbd\uc9c0\uba74\uc801_\ube44\uc728":29.79,"\ub300\uc9c0\uba74\uc801_\ube44\uc728":4.09,"\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ube44\uc728":5.8},{"\ud589\uc815\uad6c\uc5ed\uba85":"\ub2e8\uc591\uad70","\uc704\ub3c4":36.984176,"\uacbd\ub3c4":128.365906,"\uad70\uc9d1_\ub77c\ubca8":"\ub18d\uc5c5\/\uc0b0\ub9bc\ud615","\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ubcc0\ud654\uc728":3.88,"\uc784\uc57c\uba74\uc801_\ube44\uc728":88.67,"\ub18d\uacbd\uc9c0\uba74\uc801_\ube44\uc728":10.03,"\ub300\uc9c0\uba74\uc801_\ube44\uc728":0.98,"\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ube44\uc728":0.32}];
+    var colorMap = {'도시/산업형':'#ff6b35','농업/산림형':'#4caf50','균형형':'#9c27b0'};
+    var map = L.map('map').setView([36.8,127.7], 9);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+    function showInfo(item) {
+      var html = `<b style="font-size:18px;">${item['행정구역명']} (${item['군집_라벨']})</b><br>
+        🌲 임야: <b>${item['임야면적_비율'].toFixed(1)}%</b><br>
+        🌾 농경지: <b>${item['농경지면적_비율'].toFixed(1)}%</b><br>
+        🏘️ 대지: <b>${item['대지면적_비율'].toFixed(1)}%</b><br>
+        🏭 공장: <b>${item['공장용지면적_비율'].toFixed(1)}%</b>`;
+      document.getElementById('info-box').innerHTML = html;
+      document.getElementById('info-box').style.display = 'block';
+    }
+    function hideInfo() { document.getElementById('info-box').style.display = 'none'; }
+
+    data.forEach(function(item){
+      var labelHtml = `
+        <div class='my-label' style="border-left:7px solid ${colorMap[item['군집_라벨']]};">
+          <b>${item['행정구역명']}</b>
+          <span style="font-size:13px; color:${colorMap[item['군집_라벨']]};">(${item['군집_라벨']})</span><br>
+          <span style="font-size:13px;">
+          🌲 ${item['임야면적_비율'].toFixed(0)}%
+          🌾 ${item['농경지면적_비율'].toFixed(0)}%
+          🏘️ ${item['대지면적_비율'].toFixed(0)}%
+          🏭 ${item['공장용지면적_비율'].toFixed(0)}%</span>
+        </div>`;
+      var marker = L.marker([item['위도'], item['경도']], {
+        draggable:true,
+        icon: L.divIcon({
+          html: labelHtml, className:'', iconSize:null
+        })
+      })
+      .on('mouseover',()=>showInfo(item))
+      .on('mouseout',hideInfo)
+      .on('dragstart', hideInfo)
+      .on('dragend', function(e){
+        var pos = marker.getLatLng();
+        // alert(item['행정구역명']+" 이동 완료\n위도: "+pos.lat.toFixed(5)+" / 경도: "+pos.lng.toFixed(5));
+      })
+      // .on('click', ()=>showInfo(item))
+      .addTo(map);
+    });
+
+    map.on('click',hideInfo);
+  </script>
+</body>
+</html>

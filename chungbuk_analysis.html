@@ -1,0 +1,231 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>충청북도 지적통계 분석 지도</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        body { margin: 0; padding: 0; font-family: 'Malgun Gothic', sans-serif; }
+        #map { height: 100vh; width: 100%; }
+
+        .legend {
+            position: fixed;
+            bottom: 50px;
+            right: 50px;
+            width: 260px;
+            background: white;
+            padding: 15px;
+            border: 2px solid #333;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        .legend h4 { 
+            margin: 0 0 10px 0; 
+            font-size: 16px;
+            border-bottom: 2px solid #333;
+            padding-bottom: 5px;
+        }
+        .legend-item { margin: 7px 0; font-size: 13px; }
+        .legend hr { margin: 12px 0; border: 0; border-top: 1px solid #ddd; }
+
+        .cluster-info {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            max-width: 400px;
+            background: white;
+            padding: 15px;
+            border: 2px solid #333;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            z-index: 1000;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+        .cluster-info h3 {
+            margin: 0 0 15px 0;
+            font-size: 18px;
+            color: #333;
+            border-bottom: 2px solid #333;
+            padding-bottom: 8px;
+        }
+        .cluster-section {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .cluster-section h4 {
+            margin: 0 0 8px 0;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .cluster-badge {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            margin-right: 8px;
+            border: 2px solid white;
+            box-shadow: 0 0 3px rgba(0,0,0,0.3);
+        }
+        .cluster-areas {
+            font-size: 13px;
+            line-height: 1.6;
+            color: #555;
+            margin-left: 26px;
+        }
+        .cluster-count {
+            font-size: 12px;
+            color: #888;
+            margin-left: 26px;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+
+    <div class="cluster-info">
+        <h3>🗺️ 충청북도 토지 이용 군집 분류</h3>
+
+        <div class="cluster-section" style="background: #fff3e0;">
+            <h4>
+                <span class="cluster-badge" style="background: #ff6b35;"></span>
+                도시/산업형 (Urban/Industrial)
+            </h4>
+            <div class="cluster-areas">
+                청주 흥덕구, 청주 청원구<br>
+                진천군, 음성군
+            </div>
+            <div class="cluster-count">총 4개 지역 | 공장·대지 비율 높음</div>
+        </div>
+
+        <div class="cluster-section" style="background: #e8f5e9;">
+            <h4>
+                <span class="cluster-badge" style="background: #4caf50;"></span>
+                농업/산림형 (Agricultural/Forest)
+            </h4>
+            <div class="cluster-areas">
+                청주 상당구, 충주시, 제천시<br>
+                보은군, 옥천군, 영동군<br>
+                괴산군, 단양군
+            </div>
+            <div class="cluster-count">총 8개 지역 | 임야·농경지 비율 높음</div>
+        </div>
+
+        <div class="cluster-section" style="background: #f3e5f5;">
+            <h4>
+                <span class="cluster-badge" style="background: #9c27b0;"></span>
+                균형형 (Balanced)
+            </h4>
+            <div class="cluster-areas">
+                청주 서원구, 증평군
+            </div>
+            <div class="cluster-count">총 2개 지역 | 용도 균형적 분포</div>
+        </div>
+    </div>
+
+    <div class="legend">
+        <h4>📊 범례 (Legend)</h4>
+
+        <div style="margin-bottom: 12px;"><strong>군집 분류 마커</strong></div>
+        <div class="legend-item">
+            <span style="color: #ff6b35; font-size: 20px;">●</span> 도시/산업형 (4)
+        </div>
+        <div class="legend-item">
+            <span style="color: #4caf50; font-size: 20px;">●</span> 농업/산림형 (8)
+        </div>
+        <div class="legend-item">
+            <span style="color: #9c27b0; font-size: 20px;">●</span> 균형형 (2)
+        </div>
+
+        <hr>
+
+        <div style="margin-bottom: 8px;"><strong>공장용지 변화율<br>(2017-2025)</strong></div>
+        <div class="legend-item">
+            <span style="color: #d32f2f; font-size: 16px;">⬤</span> &gt;30% 급증
+        </div>
+        <div class="legend-item">
+            <span style="color: #f57c00; font-size: 16px;">⬤</span> 20-30%
+        </div>
+        <div class="legend-item">
+            <span style="color: #fbc02d; font-size: 16px;">⬤</span> 10-20%
+        </div>
+        <div class="legend-item">
+            <span style="color: #0288d1; font-size: 16px;">⬤</span> &lt;10%
+        </div>
+    </div>
+
+    <script>
+        var map = L.map('map').setView([36.8, 127.7], 9);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+
+        var data = [{"\ud589\uc815\uad6c\uc5ed\uba85":"\uccad\uc8fc \uc0c1\ub2f9\uad6c","\uc704\ub3c4":36.642885,"\uacbd\ub3c4":127.515223,"\uad70\uc9d1_\ub77c\ubca8":"\ub18d\uc5c5\/\uc0b0\ub9bc\ud615","\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ubcc0\ud654\uc728":21.24,"\uc784\uc57c\uba74\uc801_\ube44\uc728":76.68,"\ub18d\uacbd\uc9c0\uba74\uc801_\ube44\uc728":18.78,"\ub300\uc9c0\uba74\uc801_\ube44\uc728":4.26,"\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ube44\uc728":0.28},{"\ud589\uc815\uad6c\uc5ed\uba85":"\uccad\uc8fc \uc11c\uc6d0\uad6c","\uc704\ub3c4":36.624329,"\uacbd\ub3c4":127.478089,"\uad70\uc9d1_\ub77c\ubca8":"\uade0\ud615\ud615","\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ubcc0\ud654\uc728":22.88,"\uc784\uc57c\uba74\uc801_\ube44\uc728":59.17,"\ub18d\uacbd\uc9c0\uba74\uc801_\ube44\uc728":25.94,"\ub300\uc9c0\uba74\uc801_\ube44\uc728":11.74,"\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ube44\uc728":3.15},{"\ud589\uc815\uad6c\uc5ed\uba85":"\uccad\uc8fc \ud765\ub355\uad6c","\uc704\ub3c4":36.64236,"\uacbd\ub3c4":127.424378,"\uad70\uc9d1_\ub77c\ubca8":"\ub3c4\uc2dc\/\uc0b0\uc5c5\ud615","\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ubcc0\ud654\uc728":22.84,"\uc784\uc57c\uba74\uc801_\ube44\uc728":43.63,"\ub18d\uacbd\uc9c0\uba74\uc801_\ube44\uc728":35.91,"\ub300\uc9c0\uba74\uc801_\ube44\uc728":11.96,"\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ube44\uc728":8.49},{"\ud589\uc815\uad6c\uc5ed\uba85":"\uccad\uc8fc \uccad\uc6d0\uad6c","\uc704\ub3c4":36.724972,"\uacbd\ub3c4":127.491345,"\uad70\uc9d1_\ub77c\ubca8":"\ub3c4\uc2dc\/\uc0b0\uc5c5\ud615","\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ubcc0\ud654\uc728":34.05,"\uc784\uc57c\uba74\uc801_\ube44\uc728":44.74,"\ub18d\uacbd\uc9c0\uba74\uc801_\ube44\uc728":39.94,"\ub300\uc9c0\uba74\uc801_\ube44\uc728":9.45,"\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ube44\uc728":5.87},{"\ud589\uc815\uad6c\uc5ed\uba85":"\ucda9\uc8fc\uc2dc","\uc704\ub3c4":36.991016,"\uacbd\ub3c4":127.926753,"\uad70\uc9d1_\ub77c\ubca8":"\ub18d\uc5c5\/\uc0b0\ub9bc\ud615","\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ubcc0\ud654\uc728":17.65,"\uc784\uc57c\uba74\uc801_\ube44\uc728":75.92,"\ub18d\uacbd\uc9c0\uba74\uc801_\ube44\uc728":19.13,"\ub300\uc9c0\uba74\uc801_\ube44\uc728":3.48,"\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ube44\uc728":1.47},{"\ud589\uc815\uad6c\uc5ed\uba85":"\uc81c\ucc9c\uc2dc","\uc704\ub3c4":37.132646,"\uacbd\ub3c4":128.19384,"\uad70\uc9d1_\ub77c\ubca8":"\ub18d\uc5c5\/\uc0b0\ub9bc\ud615","\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ubcc0\ud654\uc728":22.69,"\uc784\uc57c\uba74\uc801_\ube44\uc728":83.29,"\ub18d\uacbd\uc9c0\uba74\uc801_\ube44\uc728":13.88,"\ub300\uc9c0\uba74\uc801_\ube44\uc728":2.26,"\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ube44\uc728":0.57},{"\ud589\uc815\uad6c\uc5ed\uba85":"\ubcf4\uc740\uad70","\uc704\ub3c4":36.489419,"\uacbd\ub3c4":127.729899,"\uad70\uc9d1_\ub77c\ubca8":"\ub18d\uc5c5\/\uc0b0\ub9bc\ud615","\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ubcc0\ud654\uc728":14.7,"\uc784\uc57c\uba74\uc801_\ube44\uc728":76.67,"\ub18d\uacbd\uc9c0\uba74\uc801_\ube44\uc728":21.03,"\ub300\uc9c0\uba74\uc801_\ube44\uc728":1.87,"\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ube44\uc728":0.43},{"\ud589\uc815\uad6c\uc5ed\uba85":"\uc625\ucc9c\uad70","\uc704\ub3c4":36.306176,"\uacbd\ub3c4":127.575715,"\uad70\uc9d1_\ub77c\ubca8":"\ub18d\uc5c5\/\uc0b0\ub9bc\ud615","\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ubcc0\ud654\uc728":16.07,"\uc784\uc57c\uba74\uc801_\ube44\uc728":75.52,"\ub18d\uacbd\uc9c0\uba74\uc801_\ube44\uc728":21.34,"\ub300\uc9c0\uba74\uc801_\ube44\uc728":2.49,"\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ube44\uc728":0.64},{"\ud589\uc815\uad6c\uc5ed\uba85":"\uc601\ub3d9\uad70","\uc704\ub3c4":36.17512,"\uacbd\ub3c4":127.788542,"\uad70\uc9d1_\ub77c\ubca8":"\ub18d\uc5c5\/\uc0b0\ub9bc\ud615","\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ubcc0\ud654\uc728":47.95,"\uc784\uc57c\uba74\uc801_\ube44\uc728":85.01,"\ub18d\uacbd\uc9c0\uba74\uc801_\ube44\uc728":13.33,"\ub300\uc9c0\uba74\uc801_\ube44\uc728":1.39,"\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ube44\uc728":0.27},{"\ud589\uc815\uad6c\uc5ed\uba85":"\uc99d\ud3c9\uad70","\uc704\ub3c4":36.785371,"\uacbd\ub3c4":127.584968,"\uad70\uc9d1_\ub77c\ubca8":"\uade0\ud615\ud615","\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ubcc0\ud654\uc728":11.38,"\uc784\uc57c\uba74\uc801_\ube44\uc728":57.84,"\ub18d\uacbd\uc9c0\uba74\uc801_\ube44\uc728":32.3,"\ub300\uc9c0\uba74\uc801_\ube44\uc728":6.76,"\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ube44\uc728":3.1},{"\ud589\uc815\uad6c\uc5ed\uba85":"\uc9c4\ucc9c\uad70","\uc704\ub3c4":36.852834,"\uacbd\ub3c4":127.438514,"\uad70\uc9d1_\ub77c\ubca8":"\ub3c4\uc2dc\/\uc0b0\uc5c5\ud615","\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ubcc0\ud654\uc728":21.13,"\uc784\uc57c\uba74\uc801_\ube44\uc728":65.8,"\ub18d\uacbd\uc9c0\uba74\uc801_\ube44\uc728":26.25,"\ub300\uc9c0\uba74\uc801_\ube44\uc728":3.62,"\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ube44\uc728":4.34},{"\ud589\uc815\uad6c\uc5ed\uba85":"\uad34\uc0b0\uad70","\uc704\ub3c4":36.815086,"\uacbd\ub3c4":127.792419,"\uad70\uc9d1_\ub77c\ubca8":"\ub18d\uc5c5\/\uc0b0\ub9bc\ud615","\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ubcc0\ud654\uc728":20.72,"\uc784\uc57c\uba74\uc801_\ube44\uc728":80.56,"\ub18d\uacbd\uc9c0\uba74\uc801_\ube44\uc728":17.11,"\ub300\uc9c0\uba74\uc801_\ube44\uc728":1.83,"\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ube44\uc728":0.5},{"\ud589\uc815\uad6c\uc5ed\uba85":"\uc74c\uc131\uad70","\uc704\ub3c4":36.940568,"\uacbd\ub3c4":127.692842,"\uad70\uc9d1_\ub77c\ubca8":"\ub3c4\uc2dc\/\uc0b0\uc5c5\ud615","\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ubcc0\ud654\uc728":25.62,"\uc784\uc57c\uba74\uc801_\ube44\uc728":60.32,"\ub18d\uacbd\uc9c0\uba74\uc801_\ube44\uc728":29.79,"\ub300\uc9c0\uba74\uc801_\ube44\uc728":4.09,"\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ube44\uc728":5.8},{"\ud589\uc815\uad6c\uc5ed\uba85":"\ub2e8\uc591\uad70","\uc704\ub3c4":36.984176,"\uacbd\ub3c4":128.365906,"\uad70\uc9d1_\ub77c\ubca8":"\ub18d\uc5c5\/\uc0b0\ub9bc\ud615","\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ubcc0\ud654\uc728":3.88,"\uc784\uc57c\uba74\uc801_\ube44\uc728":88.67,"\ub18d\uacbd\uc9c0\uba74\uc801_\ube44\uc728":10.03,"\ub300\uc9c0\uba74\uc801_\ube44\uc728":0.98,"\uacf5\uc7a5\uc6a9\uc9c0\uba74\uc801_\ube44\uc728":0.32}];
+
+        data.forEach(function(item) {
+            var colorMap = {
+                '도시/산업형': '#ff6b35',
+                '농업/산림형': '#4caf50',
+                '균형형': '#9c27b0'
+            };
+
+            var changeRate = item['공장용지면적_변화율'];
+            var circleColor, radius;
+
+            if (changeRate > 30) {
+                circleColor = '#d32f2f';
+                radius = 18000;
+            } else if (changeRate > 20) {
+                circleColor = '#f57c00';
+                radius = 14000;
+            } else if (changeRate > 10) {
+                circleColor = '#fbc02d';
+                radius = 11000;
+            } else {
+                circleColor = '#0288d1';
+                radius = 8000;
+            }
+
+            L.circle([item['위도'], item['경도']], {
+                color: circleColor,
+                fillColor: circleColor,
+                fillOpacity: 0.25,
+                opacity: 0.6,
+                weight: 2,
+                radius: radius
+            }).addTo(map).bindTooltip(
+                item['행정구역명'] + '<br>공장용지 증가: ' + changeRate.toFixed(1) + '%',
+                {permanent: false, direction: 'top'}
+            );
+
+            var icon = L.divIcon({
+                html: '<div style="background-color:' + colorMap[item['군집_라벨']] + '; width:28px; height:28px; border-radius:50%; border:3px solid white; box-shadow:0 2px 5px rgba(0,0,0,0.3); display:flex; align-items:center; justify-content:center; font-size:16px;">📍</div>',
+                className: '',
+                iconSize: [28, 28],
+                iconAnchor: [14, 14]
+            });
+
+            var popupContent = '<div style="width:220px; font-family:Malgun Gothic"><h3 style="margin:0 0 10px 0; color:' + colorMap[item['군집_라벨']] + '; border-bottom:2px solid ' + colorMap[item['군집_라벨']] + '; padding-bottom:5px;">' + item['행정구역명'] + '</h3><div style="background:#f5f5f5; padding:8px; border-radius:4px; margin-bottom:8px;"><strong>🏷️ 군집:</strong> <span style="color:' + colorMap[item['군집_라벨']] + '; font-weight:bold;">' + item['군집_라벨'] + '</span></div><div style="margin-bottom:8px;"><strong>📊 토지 구성 (2025):</strong><br><div style="margin-left:10px; line-height:1.6;">🌲 임야: ' + item['임야면적_비율'].toFixed(1) + '%<br>🌾 농경지: ' + item['농경지면적_비율'].toFixed(1) + '%<br>🏘️ 대지: ' + item['대지면적_비율'].toFixed(1) + '%<br>🏭 공장: ' + item['공장용지면적_비율'].toFixed(1) + '%</div></div><div style="background:#fff3e0; padding:8px; border-radius:4px; border-left:3px solid ' + circleColor + ';"><strong>📈 공장용지 변화율:</strong><br><span style="font-size:18px; font-weight:bold; color:' + circleColor + ';">' + (changeRate > 0 ? '+' : '') + changeRate.toFixed(1) + '%</span></div></div>';
+
+            L.marker([item['위도'], item['경도']], {icon: icon})
+                .bindPopup(popupContent)
+                .bindTooltip('<strong>' + item['행정구역명'] + '</strong><br>' + item['군집_라벨'], {permanent: false, direction: 'right', offset: [10, 0]})
+                .addTo(map);
+        });
+
+        var title = L.control({position: 'topleft'});
+        title.onAdd = function(map) {
+            var div = L.DomUtil.create('div', 'map-title');
+            div.innerHTML = '<div style="background:rgba(255,255,255,0.95); padding:10px 15px; border-radius:5px; box-shadow:0 2px 5px rgba(0,0,0,0.2); margin-top:10px; margin-left:440px; font-size:16px; font-weight:bold;">🗺️ 충청북도 지적통계 토지 이용 분석 (2017-2025)</div>';
+            return div;
+        };
+        title.addTo(map);
+    </script>
+</body>
+</html>
