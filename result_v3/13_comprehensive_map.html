@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_3d637efb57744f2b24c4e2ebe9c0ac6c {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+    <div style="position: fixed; bottom: 50px; left: 50px; z-index: 1000; 
+                background-color: white; padding: 15px; border-radius: 5px;
+                border: 2px solid gray; font-size: 12px;">
+        <b>군집 분류</b><br>
+        <i style="background:#E74C3C; width:12px; height:12px; display:inline-block; margin-right:5px;"></i> 도시/산업형<br>
+        <i style="background:#27AE60; width:12px; height:12px; display:inline-block; margin-right:5px;"></i> 농업/산림형<br>
+        <i style="background:#3498DB; width:12px; height:12px; display:inline-block; margin-right:5px;"></i> 균형형<br>
+        <hr>
+        <b>원 크기: 공장용지 변화율</b>
+    </div>
+    
+    
+            <div class="folium-map" id="map_3d637efb57744f2b24c4e2ebe9c0ac6c" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_3d637efb57744f2b24c4e2ebe9c0ac6c = L.map(
+                "map_3d637efb57744f2b24c4e2ebe9c0ac6c",
+                {
+                    center: [36.75, 127.75],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 9,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_9881b80bbf77f6094bad26830bf4d509 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_9881b80bbf77f6094bad26830bf4d509.addTo(map_3d637efb57744f2b24c4e2ebe9c0ac6c);
+        
+    
+            var circle_marker_eeeef5209c3e751605a68e1a0c1da19e = L.circleMarker(
+                [36.8153, 127.7865],
+                {"bubblingMouseEvents": true, "color": "#27AE60", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#27AE60", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 14.216, "stroke": true, "weight": 2}
+            ).addTo(map_3d637efb57744f2b24c4e2ebe9c0ac6c);
+        
+    
+        var popup_f36890f78c460bfa5611ba6b2fa453f1 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_4034dd16fe8fb98f8a69db5616f6207f = $(`<div id="html_4034dd16fe8fb98f8a69db5616f6207f" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 280px;">             <h4 style="margin-bottom: 5px;">괴산군</h4>             <p style="color: #27AE60; font-weight: bold; margin: 0;">농업/산림형</p>             <hr style="margin: 8px 0;">             <b>2025년 토지 구성</b><br>             - 임야: 80.6%<br>             - 농경지: 17.1%<br>             - 대지: 1.8%<br>             - 공장용지: 0.50%<br>             <hr style="margin: 8px 0;">             <b>변화율 (2017→2025)</b><br>             - 임야: -0.46%<br>             - 농경지: -1.58%<br>             - 대지: +13.71%<br>             - <span style="color: red;">공장용지: +20.72%</span><br>             <hr style="margin: 8px 0;">             <b>인구 현황</b><br>             - 2025년 인구: 21,232명<br>             - <span style="color: blue;">인구 변화율: +3.2%</span>         </div>         </div>`)[0];
+                popup_f36890f78c460bfa5611ba6b2fa453f1.setContent(html_4034dd16fe8fb98f8a69db5616f6207f);
+            
+        
+
+        circle_marker_eeeef5209c3e751605a68e1a0c1da19e.bindPopup(popup_f36890f78c460bfa5611ba6b2fa453f1)
+        ;
+
+        
+    
+    
+            circle_marker_eeeef5209c3e751605a68e1a0c1da19e.bindTooltip(
+                `<div>
+                     괴산군 (농업/산림형)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2da688c3310ca53cd63e647a45bfef0a = L.circleMarker(
+                [36.9845, 128.3655],
+                {"bubblingMouseEvents": true, "color": "#27AE60", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#27AE60", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9.164, "stroke": true, "weight": 2}
+            ).addTo(map_3d637efb57744f2b24c4e2ebe9c0ac6c);
+        
+    
+        var popup_1b7c31d85e8bafd3dbd0d48d05aea7d2 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ee91d2fd483aa6c3a5b398cfd1a7da0d = $(`<div id="html_ee91d2fd483aa6c3a5b398cfd1a7da0d" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 280px;">             <h4 style="margin-bottom: 5px;">단양군</h4>             <p style="color: #27AE60; font-weight: bold; margin: 0;">농업/산림형</p>             <hr style="margin: 8px 0;">             <b>2025년 토지 구성</b><br>             - 임야: 88.7%<br>             - 농경지: 10.0%<br>             - 대지: 1.0%<br>             - 공장용지: 0.32%<br>             <hr style="margin: 8px 0;">             <b>변화율 (2017→2025)</b><br>             - 임야: -0.20%<br>             - 농경지: -1.97%<br>             - 대지: +10.71%<br>             - <span style="color: red;">공장용지: +3.88%</span><br>             <hr style="margin: 8px 0;">             <b>인구 현황</b><br>             - 2025년 인구: 15,252명<br>             - <span style="color: blue;">인구 변화율: +3.2%</span>         </div>         </div>`)[0];
+                popup_1b7c31d85e8bafd3dbd0d48d05aea7d2.setContent(html_ee91d2fd483aa6c3a5b398cfd1a7da0d);
+            
+        
+
+        circle_marker_2da688c3310ca53cd63e647a45bfef0a.bindPopup(popup_1b7c31d85e8bafd3dbd0d48d05aea7d2)
+        ;
+
+        
+    
+    
+            circle_marker_2da688c3310ca53cd63e647a45bfef0a.bindTooltip(
+                `<div>
+                     단양군 (농업/산림형)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0be5a278ad63eacdfa6ef6e33cdeb99f = L.circleMarker(
+                [36.4893, 127.729],
+                {"bubblingMouseEvents": true, "color": "#27AE60", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#27AE60", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12.41, "stroke": true, "weight": 2}
+            ).addTo(map_3d637efb57744f2b24c4e2ebe9c0ac6c);
+        
+    
+        var popup_5dbf2030b96f55db722965723066e135 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_0e452236ebb5659c85404cf55fba197a = $(`<div id="html_0e452236ebb5659c85404cf55fba197a" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 280px;">             <h4 style="margin-bottom: 5px;">보은군</h4>             <p style="color: #27AE60; font-weight: bold; margin: 0;">농업/산림형</p>             <hr style="margin: 8px 0;">             <b>2025년 토지 구성</b><br>             - 임야: 76.7%<br>             - 농경지: 21.0%<br>             - 대지: 1.9%<br>             - 공장용지: 0.43%<br>             <hr style="margin: 8px 0;">             <b>변화율 (2017→2025)</b><br>             - 임야: -0.27%<br>             - 농경지: -1.21%<br>             - 대지: +8.35%<br>             - <span style="color: red;">공장용지: +14.70%</span><br>             <hr style="margin: 8px 0;">             <b>인구 현황</b><br>             - 2025년 인구: 16,793명<br>             - <span style="color: blue;">인구 변화율: +1.8%</span>         </div>         </div>`)[0];
+                popup_5dbf2030b96f55db722965723066e135.setContent(html_0e452236ebb5659c85404cf55fba197a);
+            
+        
+
+        circle_marker_0be5a278ad63eacdfa6ef6e33cdeb99f.bindPopup(popup_5dbf2030b96f55db722965723066e135)
+        ;
+
+        
+    
+    
+            circle_marker_0be5a278ad63eacdfa6ef6e33cdeb99f.bindTooltip(
+                `<div>
+                     보은군 (농업/산림형)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d88c57e777cc4f7f2100ede9a6236781 = L.circleMarker(
+                [36.1748, 127.7769],
+                {"bubblingMouseEvents": true, "color": "#27AE60", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#27AE60", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 22.384999999999998, "stroke": true, "weight": 2}
+            ).addTo(map_3d637efb57744f2b24c4e2ebe9c0ac6c);
+        
+    
+        var popup_0749e14d55172e970a86f50327a4c67c = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_10bdb6186933f5d95eaf2ddcfe5b1bd1 = $(`<div id="html_10bdb6186933f5d95eaf2ddcfe5b1bd1" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 280px;">             <h4 style="margin-bottom: 5px;">영동군</h4>             <p style="color: #27AE60; font-weight: bold; margin: 0;">농업/산림형</p>             <hr style="margin: 8px 0;">             <b>2025년 토지 구성</b><br>             - 임야: 85.0%<br>             - 농경지: 13.3%<br>             - 대지: 1.4%<br>             - 공장용지: 0.27%<br>             <hr style="margin: 8px 0;">             <b>변화율 (2017→2025)</b><br>             - 임야: -0.20%<br>             - 농경지: -2.25%<br>             - 대지: +7.83%<br>             - <span style="color: red;">공장용지: +47.95%</span><br>             <hr style="margin: 8px 0;">             <b>인구 현황</b><br>             - 2025년 인구: 23,568명<br>             - <span style="color: blue;">인구 변화율: -2.3%</span>         </div>         </div>`)[0];
+                popup_0749e14d55172e970a86f50327a4c67c.setContent(html_10bdb6186933f5d95eaf2ddcfe5b1bd1);
+            
+        
+
+        circle_marker_d88c57e777cc4f7f2100ede9a6236781.bindPopup(popup_0749e14d55172e970a86f50327a4c67c)
+        ;
+
+        
+    
+    
+            circle_marker_d88c57e777cc4f7f2100ede9a6236781.bindTooltip(
+                `<div>
+                     영동군 (농업/산림형)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2a66ec674135ecfa207fda94b802976e = L.circleMarker(
+                [36.3063, 127.5714],
+                {"bubblingMouseEvents": true, "color": "#27AE60", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#27AE60", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12.821, "stroke": true, "weight": 2}
+            ).addTo(map_3d637efb57744f2b24c4e2ebe9c0ac6c);
+        
+    
+        var popup_55605700c9b3ea64cbf62fa9acd076e9 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_56b44784c0e76aee3b91ea404b23fa14 = $(`<div id="html_56b44784c0e76aee3b91ea404b23fa14" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 280px;">             <h4 style="margin-bottom: 5px;">옥천군</h4>             <p style="color: #27AE60; font-weight: bold; margin: 0;">농업/산림형</p>             <hr style="margin: 8px 0;">             <b>2025년 토지 구성</b><br>             - 임야: 75.5%<br>             - 농경지: 21.3%<br>             - 대지: 2.5%<br>             - 공장용지: 0.64%<br>             <hr style="margin: 8px 0;">             <b>변화율 (2017→2025)</b><br>             - 임야: -0.53%<br>             - 농경지: -2.46%<br>             - 대지: +11.74%<br>             - <span style="color: red;">공장용지: +16.07%</span><br>             <hr style="margin: 8px 0;">             <b>인구 현황</b><br>             - 2025년 인구: 25,801명<br>             - <span style="color: blue;">인구 변화율: +10.8%</span>         </div>         </div>`)[0];
+                popup_55605700c9b3ea64cbf62fa9acd076e9.setContent(html_56b44784c0e76aee3b91ea404b23fa14);
+            
+        
+
+        circle_marker_2a66ec674135ecfa207fda94b802976e.bindPopup(popup_55605700c9b3ea64cbf62fa9acd076e9)
+        ;
+
+        
+    
+    
+            circle_marker_2a66ec674135ecfa207fda94b802976e.bindTooltip(
+                `<div>
+                     옥천군 (농업/산림형)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7314e407e9183c3000318679ab590ae9 = L.circleMarker(
+                [36.9403, 127.6905],
+                {"bubblingMouseEvents": true, "color": "#E74C3C", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E74C3C", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 15.686, "stroke": true, "weight": 2}
+            ).addTo(map_3d637efb57744f2b24c4e2ebe9c0ac6c);
+        
+    
+        var popup_fcb846a0d5221a8e96f113e1ae348c8e = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_9ac29a2188e483b88fca27745f8468f4 = $(`<div id="html_9ac29a2188e483b88fca27745f8468f4" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 280px;">             <h4 style="margin-bottom: 5px;">음성군</h4>             <p style="color: #E74C3C; font-weight: bold; margin: 0;">도시/산업형</p>             <hr style="margin: 8px 0;">             <b>2025년 토지 구성</b><br>             - 임야: 60.3%<br>             - 농경지: 29.8%<br>             - 대지: 4.1%<br>             - 공장용지: 5.80%<br>             <hr style="margin: 8px 0;">             <b>변화율 (2017→2025)</b><br>             - 임야: -2.82%<br>             - 농경지: -4.69%<br>             - 대지: +14.62%<br>             - <span style="color: red;">공장용지: +25.62%</span><br>             <hr style="margin: 8px 0;">             <b>인구 현황</b><br>             - 2025년 인구: 50,933명<br>             - <span style="color: blue;">인구 변화율: +13.0%</span>         </div>         </div>`)[0];
+                popup_fcb846a0d5221a8e96f113e1ae348c8e.setContent(html_9ac29a2188e483b88fca27745f8468f4);
+            
+        
+
+        circle_marker_7314e407e9183c3000318679ab590ae9.bindPopup(popup_fcb846a0d5221a8e96f113e1ae348c8e)
+        ;
+
+        
+    
+    
+            circle_marker_7314e407e9183c3000318679ab590ae9.bindTooltip(
+                `<div>
+                     음성군 (도시/산업형)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e3232d4e5026917ae0ba448a409d13b6 = L.circleMarker(
+                [37.1326, 128.1909],
+                {"bubblingMouseEvents": true, "color": "#27AE60", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#27AE60", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 14.807, "stroke": true, "weight": 2}
+            ).addTo(map_3d637efb57744f2b24c4e2ebe9c0ac6c);
+        
+    
+        var popup_7588d20bf0d9e0bf815f3a37c8ed77b1 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_8080780354e4df0c5ff78741e9da23ea = $(`<div id="html_8080780354e4df0c5ff78741e9da23ea" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 280px;">             <h4 style="margin-bottom: 5px;">제천시</h4>             <p style="color: #27AE60; font-weight: bold; margin: 0;">농업/산림형</p>             <hr style="margin: 8px 0;">             <b>2025년 토지 구성</b><br>             - 임야: 83.3%<br>             - 농경지: 13.9%<br>             - 대지: 2.3%<br>             - 공장용지: 0.57%<br>             <hr style="margin: 8px 0;">             <b>변화율 (2017→2025)</b><br>             - 임야: -0.74%<br>             - 농경지: -2.71%<br>             - 대지: +13.30%<br>             - <span style="color: red;">공장용지: +22.69%</span><br>             <hr style="margin: 8px 0;">             <b>인구 현황</b><br>             - 2025년 인구: 66,399명<br>             - <span style="color: blue;">인구 변화율: +7.2%</span>         </div>         </div>`)[0];
+                popup_7588d20bf0d9e0bf815f3a37c8ed77b1.setContent(html_8080780354e4df0c5ff78741e9da23ea);
+            
+        
+
+        circle_marker_e3232d4e5026917ae0ba448a409d13b6.bindPopup(popup_7588d20bf0d9e0bf815f3a37c8ed77b1)
+        ;
+
+        
+    
+    
+            circle_marker_e3232d4e5026917ae0ba448a409d13b6.bindTooltip(
+                `<div>
+                     제천시 (농업/산림형)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7d7c008a18ceb5e14a3f3bf9d3b44632 = L.circleMarker(
+                [36.7853, 127.5814],
+                {"bubblingMouseEvents": true, "color": "#3498DB", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3498DB", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11.414, "stroke": true, "weight": 2}
+            ).addTo(map_3d637efb57744f2b24c4e2ebe9c0ac6c);
+        
+    
+        var popup_1e84b5ed185b80feca1300da4582b6cb = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_3fa2214b6da6c012f670e440ebd73aa7 = $(`<div id="html_3fa2214b6da6c012f670e440ebd73aa7" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 280px;">             <h4 style="margin-bottom: 5px;">증평군</h4>             <p style="color: #3498DB; font-weight: bold; margin: 0;">균형형</p>             <hr style="margin: 8px 0;">             <b>2025년 토지 구성</b><br>             - 임야: 57.8%<br>             - 농경지: 32.3%<br>             - 대지: 6.8%<br>             - 공장용지: 3.10%<br>             <hr style="margin: 8px 0;">             <b>변화율 (2017→2025)</b><br>             - 임야: -0.84%<br>             - 농경지: -3.55%<br>             - 대지: +7.77%<br>             - <span style="color: red;">공장용지: +11.38%</span><br>             <hr style="margin: 8px 0;">             <b>인구 현황</b><br>             - 2025년 인구: 19,119명<br>             - <span style="color: blue;">인구 변화율: +14.5%</span>         </div>         </div>`)[0];
+                popup_1e84b5ed185b80feca1300da4582b6cb.setContent(html_3fa2214b6da6c012f670e440ebd73aa7);
+            
+        
+
+        circle_marker_7d7c008a18ceb5e14a3f3bf9d3b44632.bindPopup(popup_1e84b5ed185b80feca1300da4582b6cb)
+        ;
+
+        
+    
+    
+            circle_marker_7d7c008a18ceb5e14a3f3bf9d3b44632.bindTooltip(
+                `<div>
+                     증평군 (균형형)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4323f8776bd816df14633135cb0a2450 = L.circleMarker(
+                [36.8553, 127.4355],
+                {"bubblingMouseEvents": true, "color": "#E74C3C", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E74C3C", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 14.338999999999999, "stroke": true, "weight": 2}
+            ).addTo(map_3d637efb57744f2b24c4e2ebe9c0ac6c);
+        
+    
+        var popup_ed0dd5feb1fc5d6af79b47d4d8a413ca = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_6971940249a45ac1649fa64532a9724f = $(`<div id="html_6971940249a45ac1649fa64532a9724f" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 280px;">             <h4 style="margin-bottom: 5px;">진천군</h4>             <p style="color: #E74C3C; font-weight: bold; margin: 0;">도시/산업형</p>             <hr style="margin: 8px 0;">             <b>2025년 토지 구성</b><br>             - 임야: 65.8%<br>             - 농경지: 26.2%<br>             - 대지: 3.6%<br>             - 공장용지: 4.34%<br>             <hr style="margin: 8px 0;">             <b>변화율 (2017→2025)</b><br>             - 임야: -1.81%<br>             - 농경지: -3.33%<br>             - 대지: +12.50%<br>             - <span style="color: red;">공장용지: +21.13%</span><br>             <hr style="margin: 8px 0;">             <b>인구 현황</b><br>             - 2025년 인구: 42,985명<br>             - <span style="color: blue;">인구 변화율: +30.7%</span>         </div>         </div>`)[0];
+                popup_ed0dd5feb1fc5d6af79b47d4d8a413ca.setContent(html_6971940249a45ac1649fa64532a9724f);
+            
+        
+
+        circle_marker_4323f8776bd816df14633135cb0a2450.bindPopup(popup_ed0dd5feb1fc5d6af79b47d4d8a413ca)
+        ;
+
+        
+    
+    
+            circle_marker_4323f8776bd816df14633135cb0a2450.bindTooltip(
+                `<div>
+                     진천군 (도시/산업형)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5741724e8c69a87b13ecb346c95a7544 = L.circleMarker(
+                [36.5746, 127.5252],
+                {"bubblingMouseEvents": true, "color": "#27AE60", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#27AE60", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 14.372, "stroke": true, "weight": 2}
+            ).addTo(map_3d637efb57744f2b24c4e2ebe9c0ac6c);
+        
+    
+        var popup_44466c90842ab955904b3401bb74afe5 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_3d3d930971b394b0aee934acab6937b9 = $(`<div id="html_3d3d930971b394b0aee934acab6937b9" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 280px;">             <h4 style="margin-bottom: 5px;">청주 상당구</h4>             <p style="color: #27AE60; font-weight: bold; margin: 0;">농업/산림형</p>             <hr style="margin: 8px 0;">             <b>2025년 토지 구성</b><br>             - 임야: 76.7%<br>             - 농경지: 18.8%<br>             - 대지: 4.3%<br>             - 공장용지: 0.28%<br>             <hr style="margin: 8px 0;">             <b>변화율 (2017→2025)</b><br>             - 임야: -1.12%<br>             - 농경지: -4.62%<br>             - 대지: +13.92%<br>             - <span style="color: red;">공장용지: +21.24%</span><br>             <hr style="margin: 8px 0;">             <b>인구 현황</b><br>             - 2025년 인구: 89,305명<br>             - <span style="color: blue;">인구 변화율: +28.3%</span>         </div>         </div>`)[0];
+                popup_44466c90842ab955904b3401bb74afe5.setContent(html_3d3d930971b394b0aee934acab6937b9);
+            
+        
+
+        circle_marker_5741724e8c69a87b13ecb346c95a7544.bindPopup(popup_44466c90842ab955904b3401bb74afe5)
+        ;
+
+        
+    
+    
+            circle_marker_5741724e8c69a87b13ecb346c95a7544.bindTooltip(
+                `<div>
+                     청주 상당구 (농업/산림형)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_dc6122fcc46ca1e74552177459f7315c = L.circleMarker(
+                [36.5786, 127.4597],
+                {"bubblingMouseEvents": true, "color": "#3498DB", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3498DB", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 14.864, "stroke": true, "weight": 2}
+            ).addTo(map_3d637efb57744f2b24c4e2ebe9c0ac6c);
+        
+    
+        var popup_fca9e73a13106b766531ff238a747512 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_38eed98bdaf10727498961129360c47c = $(`<div id="html_38eed98bdaf10727498961129360c47c" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 280px;">             <h4 style="margin-bottom: 5px;">청주 서원구</h4>             <p style="color: #3498DB; font-weight: bold; margin: 0;">균형형</p>             <hr style="margin: 8px 0;">             <b>2025년 토지 구성</b><br>             - 임야: 59.2%<br>             - 농경지: 25.9%<br>             - 대지: 11.7%<br>             - 공장용지: 3.15%<br>             <hr style="margin: 8px 0;">             <b>변화율 (2017→2025)</b><br>             - 임야: -1.84%<br>             - 농경지: -4.64%<br>             - 대지: +10.82%<br>             - <span style="color: red;">공장용지: +22.88%</span><br>             <hr style="margin: 8px 0;">             <b>인구 현황</b><br>             - 2025년 인구: 89,484명<br>             - <span style="color: blue;">인구 변화율: +1.1%</span>         </div>         </div>`)[0];
+                popup_fca9e73a13106b766531ff238a747512.setContent(html_38eed98bdaf10727498961129360c47c);
+            
+        
+
+        circle_marker_dc6122fcc46ca1e74552177459f7315c.bindPopup(popup_fca9e73a13106b766531ff238a747512)
+        ;
+
+        
+    
+    
+            circle_marker_dc6122fcc46ca1e74552177459f7315c.bindTooltip(
+                `<div>
+                     청주 서원구 (균형형)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4d96071a830101e5efd3fdbd9d087c84 = L.circleMarker(
+                [36.7118, 127.5255],
+                {"bubblingMouseEvents": true, "color": "#E74C3C", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E74C3C", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18.214999999999996, "stroke": true, "weight": 2}
+            ).addTo(map_3d637efb57744f2b24c4e2ebe9c0ac6c);
+        
+    
+        var popup_62652cfe84420feb8bb016225539c011 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_4e1b012cb0dbff86a9e4b2ab13a8f1b7 = $(`<div id="html_4e1b012cb0dbff86a9e4b2ab13a8f1b7" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 280px;">             <h4 style="margin-bottom: 5px;">청주 청원구</h4>             <p style="color: #E74C3C; font-weight: bold; margin: 0;">도시/산업형</p>             <hr style="margin: 8px 0;">             <b>2025년 토지 구성</b><br>             - 임야: 44.7%<br>             - 농경지: 39.9%<br>             - 대지: 9.4%<br>             - 공장용지: 5.87%<br>             <hr style="margin: 8px 0;">             <b>변화율 (2017→2025)</b><br>             - 임야: -4.72%<br>             - 농경지: -4.97%<br>             - 대지: +13.05%<br>             - <span style="color: red;">공장용지: +34.05%</span><br>             <hr style="margin: 8px 0;">             <b>인구 현황</b><br>             - 2025년 인구: 90,807명<br>             - <span style="color: blue;">인구 변화율: +12.2%</span>         </div>         </div>`)[0];
+                popup_62652cfe84420feb8bb016225539c011.setContent(html_4e1b012cb0dbff86a9e4b2ab13a8f1b7);
+            
+        
+
+        circle_marker_4d96071a830101e5efd3fdbd9d087c84.bindPopup(popup_62652cfe84420feb8bb016225539c011)
+        ;
+
+        
+    
+    
+            circle_marker_4d96071a830101e5efd3fdbd9d087c84.bindTooltip(
+                `<div>
+                     청주 청원구 (도시/산업형)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_496c98e43ad8c9bbcc1fc8ea300ec798 = L.circleMarker(
+                [36.6346, 127.4278],
+                {"bubblingMouseEvents": true, "color": "#E74C3C", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E74C3C", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 14.852, "stroke": true, "weight": 2}
+            ).addTo(map_3d637efb57744f2b24c4e2ebe9c0ac6c);
+        
+    
+        var popup_83000525bc7d9feccc0d47da9c81d613 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_8b62dcec82c5816901268ff74da46b5f = $(`<div id="html_8b62dcec82c5816901268ff74da46b5f" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 280px;">             <h4 style="margin-bottom: 5px;">청주 흥덕구</h4>             <p style="color: #E74C3C; font-weight: bold; margin: 0;">도시/산업형</p>             <hr style="margin: 8px 0;">             <b>2025년 토지 구성</b><br>             - 임야: 43.6%<br>             - 농경지: 35.9%<br>             - 대지: 12.0%<br>             - 공장용지: 8.49%<br>             <hr style="margin: 8px 0;">             <b>변화율 (2017→2025)</b><br>             - 임야: -4.60%<br>             - 농경지: -8.57%<br>             - 대지: +21.84%<br>             - <span style="color: red;">공장용지: +22.84%</span><br>             <hr style="margin: 8px 0;">             <b>인구 현황</b><br>             - 2025년 인구: 139,942명<br>             - <span style="color: blue;">인구 변화율: +30.8%</span>         </div>         </div>`)[0];
+                popup_83000525bc7d9feccc0d47da9c81d613.setContent(html_8b62dcec82c5816901268ff74da46b5f);
+            
+        
+
+        circle_marker_496c98e43ad8c9bbcc1fc8ea300ec798.bindPopup(popup_83000525bc7d9feccc0d47da9c81d613)
+        ;
+
+        
+    
+    
+            circle_marker_496c98e43ad8c9bbcc1fc8ea300ec798.bindTooltip(
+                `<div>
+                     청주 흥덕구 (도시/산업형)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_820b3c7c5ab023945a4f4e256ac7d9ab = L.circleMarker(
+                [36.9915, 127.9259],
+                {"bubblingMouseEvents": true, "color": "#27AE60", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#27AE60", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 13.294999999999998, "stroke": true, "weight": 2}
+            ).addTo(map_3d637efb57744f2b24c4e2ebe9c0ac6c);
+        
+    
+        var popup_ba33694fef145236ca4d07098f4dfd02 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_4fea720d17ebc6ca865df777c16c7233 = $(`<div id="html_4fea720d17ebc6ca865df777c16c7233" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 280px;">             <h4 style="margin-bottom: 5px;">충주시</h4>             <p style="color: #27AE60; font-weight: bold; margin: 0;">농업/산림형</p>             <hr style="margin: 8px 0;">             <b>2025년 토지 구성</b><br>             - 임야: 75.9%<br>             - 농경지: 19.1%<br>             - 대지: 3.5%<br>             - 공장용지: 1.47%<br>             <hr style="margin: 8px 0;">             <b>변화율 (2017→2025)</b><br>             - 임야: -0.86%<br>             - 농경지: -2.80%<br>             - 대지: +10.33%<br>             - <span style="color: red;">공장용지: +17.65%</span><br>             <hr style="margin: 8px 0;">             <b>인구 현황</b><br>             - 2025년 인구: 104,563명<br>             - <span style="color: blue;">인구 변화율: +15.9%</span>         </div>         </div>`)[0];
+                popup_ba33694fef145236ca4d07098f4dfd02.setContent(html_4fea720d17ebc6ca865df777c16c7233);
+            
+        
+
+        circle_marker_820b3c7c5ab023945a4f4e256ac7d9ab.bindPopup(popup_ba33694fef145236ca4d07098f4dfd02)
+        ;
+
+        
+    
+    
+            circle_marker_820b3c7c5ab023945a4f4e256ac7d9ab.bindTooltip(
+                `<div>
+                     충주시 (농업/산림형)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+</script>
+</html>
