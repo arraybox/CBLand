@@ -127,9 +127,9 @@ def plot_heatmap_trend(df_sum, outname='heatmap_도전체추이.png'):
     plt.show()
 
 if __name__ == "__main__":
-    df = pd.read_csv(os.path.join(os.getcwd(), '01_chungbuk_yearly_full_data.csv'))
-    df_sum = pd.read_csv(os.path.join(os.getcwd(), '08_chungbuk_yearly_use_trend.csv'))
-    df_ext = pd.read_csv(os.path.join(os.getcwd(), '09_chungbuk_extreme_change_areas.csv'))
+    df = pd.read_csv(os.path.join(os.getcwd(), 'data', '01_chungbuk_yearly_full_data.csv'))
+    df_sum = pd.read_csv(os.path.join(os.getcwd(), 'data', '08_chungbuk_yearly_use_trend.csv'))
+    df_ext = pd.read_csv(os.path.join(os.getcwd(), 'data', '09_chungbuk_extreme_change_areas.csv'))
 
     plot_donut_by_year(df, 2025, outname='도넛차트_2025.png')
     run_pca_plot(df, outname='PCA_격자라벨.png')
